@@ -17,7 +17,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 350px;
 }
 
 h1 {
@@ -26,14 +26,22 @@ h1 {
     color: #333;
 }
 
-#question-container {
-    margin-bottom: 20px;
+#category-container, #difficulty-container {
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-#question {
-    margin-bottom: 15px;
-    font-size: 18px;
+label {
+    display: block;
+    margin-bottom: 5px;
     color: #555;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .btn-container {
@@ -55,12 +63,16 @@ h1 {
     background-color: #0056b3;
 }
 
-#controls {
+#question-container, #controls, #score-container {
     margin-top: 20px;
 }
 
-#score-container {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #333;
+#question {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #555;
+}
+
+.hidden {
+    display: none;
 }
