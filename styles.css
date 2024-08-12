@@ -15,14 +15,15 @@ body {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 350px;
+    transition: all 0.3s ease;
 }
 
 h1 {
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 26px;
     color: #333;
 }
 
@@ -42,6 +43,12 @@ select {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+#timer-container {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #ff0000;
 }
 
 .btn-container {
@@ -75,4 +82,8 @@ select {
 
 .hidden {
     display: none;
+}
+
+#game-container.hidden {
+    opacity: 0.5;
 }

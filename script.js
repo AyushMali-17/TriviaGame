@@ -22,7 +22,17 @@ const questions = {
             ],
             difficulty: "medium"
         },
-        // Additional questions
+        // Additional questions for General Knowledge
+        {
+            question: "What is the largest mammal?",
+            answers: [
+                { text: "Blue Whale", correct: true },
+                { text: "Elephant", correct: false },
+                { text: "Giraffe", correct: false },
+                { text: "Orca", correct: false }
+            ],
+            difficulty: "hard"
+        },
     ],
     science: [
         {
@@ -35,7 +45,17 @@ const questions = {
             ],
             difficulty: "easy"
         },
-        // Additional questions
+        // Additional questions for Science
+        {
+            question: "What planet is known as the 'Morning Star'?",
+            answers: [
+                { text: "Venus", correct: true },
+                { text: "Mars", correct: false },
+                { text: "Jupiter", correct: false },
+                { text: "Saturn", correct: false }
+            ],
+            difficulty: "medium"
+        },
     ],
     history: [
         {
@@ -48,7 +68,17 @@ const questions = {
             ],
             difficulty: "easy"
         },
-        // Additional questions
+        // Additional questions for History
+        {
+            question: "In which year did World War II end?",
+            answers: [
+                { text: "1945", correct: true },
+                { text: "1939", correct: false },
+                { text: "1918", correct: false },
+                { text: "1965", correct: false }
+            ],
+            difficulty: "medium"
+        },
     ]
 };
 
@@ -56,6 +86,8 @@ let selectedCategory = "general";
 let selectedDifficulty = "easy";
 let currentQuestionIndex = 0;
 let score = 0;
+let timer;
+let timeLeft = 30;
 
 const startButton = document.getElementById('start-btn');
 const categorySelect = document.getElementById('category');
@@ -67,6 +99,8 @@ const nextButton = document.getElementById('next-btn');
 const scoreElement = document.getElementById('score');
 const scoreContainer = document.getElementById('score-container');
 const controlsContainer = document.getElementById('controls');
+const timerElement = document.getElementById('timer');
+const timerContainer = document.getElementById('timer-container');
 
 startButton.addEventListener('click', startGame);
 
@@ -75,12 +109,14 @@ function startGame() {
     selectedDifficulty = difficultySelect.value;
     currentQuestionIndex = 0;
     score = 0;
+    timeLeft = 30;
     startButton.parentElement.classList.add('hidden');
     categorySelect.parentElement.classList.add('hidden');
     difficultySelect.parentElement.classList.add('hidden');
     questionContainer.classList.remove('hidden');
     controlsContainer.classList.remove('hidden');
     scoreContainer.classList.remove('hidden');
+    timerContainer.classList.remove('hidden');
     setNextQuestion();
 }
 
@@ -88,6 +124,7 @@ function setNextQuestion() {
     resetState();
     const filteredQuestions = questions[selectedCategory].filter(q => q.difficulty === selectedDifficulty);
     showQuestion(filteredQuestions[currentQuestionIndex]);
+    startTimer();
 }
 
 function showQuestion(question) {
@@ -104,9 +141,13 @@ function showQuestion(question) {
 function resetState() {
     nextButton.style.display = 'none';
     answerButtonsElement.innerHTML = '';
+    clearInterval(timer);
+    timerElement.innerText = "30";
+    timeLeft = 30;
 }
 
 function selectAnswer(answer, question) {
+    clearInterval(timer);
     if (answer.correct) {
         score++;
         scoreElement.innerText = score;
@@ -120,8 +161,20 @@ function selectAnswer(answer, question) {
     }
 }
 
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        timerElement.innerText = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            selectAnswer({ correct: false }, null);  // If time runs out, treat as incorrect answer
+        }
+    }, 1000);
+}
+
 function showResults() {
     questionElement.innerText = `Game Over! Your final score is ${score}.`;
     answerButtonsElement.innerHTML = '';
     nextButton.style.display = 'none';
+    timerContainer.classList.add('hidden');
 }
