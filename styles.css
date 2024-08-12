@@ -25,11 +25,13 @@ h1 {
     margin-bottom: 20px;
     font-size: 26px;
     color: #333;
+    animation: fadeIn 1s ease-in-out;
 }
 
 #category-container, #difficulty-container {
     margin-bottom: 15px;
     text-align: left;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 label {
@@ -49,12 +51,14 @@ select {
     margin-top: 10px;
     font-size: 18px;
     color: #ff0000;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .btn-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    animation: fadeInUp 1s ease-in-out;
 }
 
 .btn {
@@ -64,13 +68,15 @@ select {
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .btn:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-#question-container, #controls, #score-container {
+#question-container, #controls, #score-container, #leaderboard-container {
     margin-top: 20px;
 }
 
@@ -78,12 +84,39 @@ select {
     margin-bottom: 15px;
     font-size: 18px;
     color: #555;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+#leaderboard-container {
+    margin-top: 30px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+#leaderboard-container h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #333;
 }
 
 .hidden {
     display: none;
 }
 
-#game-container.hidden {
-    opacity: 0.5;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
 }
